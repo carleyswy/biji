@@ -192,6 +192,207 @@ function FriendStatusWithCounter(props) {
   
 
 
+  ## Hook 规则
+
+  Hook 本质就是 JavaScript 函数，但是在使用它时需要遵循两条规则。
+
+  1. 不要在循环，条件或嵌套函数中调用 Hook  
+确保总是在你的 React 函数的最顶层调用他们。
+
+  2. 只在 React 函数中调用 Hook  
+不要在普通的 JavaScript 函数中调用 Hook  
+在 React 的函数组件中调用 Hook  
+在自定义 Hook 中调用其他 Hook (我们将会在下一页 中学习这个。)  
+
+  
+
+
+
+## 自定义 Hook
+自定义 Hook 是一个函数，其名称以 “use” 开头，函数内部可以调用其他的 Hook，请确保只在自定义 Hook 的顶层无条件地调用其他 Hook。  
+
+```javascript
+import { useState, useEffect } from 'react';
+
+function useFriendStatus(friendID) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  useEffect(() => {
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+
+    ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
+    return () => {
+      ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
+    };
+  });
+
+  return isOnline;
+}
+```
+
+```javascript
+function FriendStatus(props) {
+  const isOnline = useFriendStatus(props.friend.id);
+
+  if (isOnline === null) {
+    return 'Loading...';
+  }
+  return isOnline ? 'Online' : 'Offline';
+}
+
+function FriendListItem(props) {
+  const isOnline = useFriendStatus(props.friend.id);
+
+  return (
+    <li style={{ color: isOnline ? 'green' : 'black' }}>
+      {props.friend.name}
+    </li>
+  );
+}
+```
+
+```javascript
+const friendList = [
+  { id: 1, name: 'Phoebe' },
+  { id: 2, name: 'Rachel' },
+  { id: 3, name: 'Ross' },
+];
+
+function ChatRecipientPicker() {
+  const [recipientID, setRecipientID] = useState(1);
+  const isRecipientOnline = useFriendStatus(recipientID);
+
+  return (
+    <>
+      <Circle color={isRecipientOnline ? 'green' : 'red'} />
+      <select
+        value={recipientID}
+        onChange={e => setRecipientID(Number(e.target.value))}
+      >
+        {friendList.map(friend => (
+          <option key={friend.id} value={friend.id}>
+            {friend.name}
+          </option>
+        ))}
+      </select>
+    </>
+  );
+}
+```
+
+## Hook API 索引
+基础 Hook  
+> useState  
+> useEffect  
+> useContext    
+
+额外的 Hook  
+> useReducer  
+> useCallback  
+> useMemo  
+> useRef  
+> useImperativeHandle  
+> useLayoutEffect  
+> useDebugValue
+
+
+### useState
+
+```javascript
+const [state, setState] = useState(initialState);
+```
+
+返回一个 state，以及更新 state 的函数。  
+
+在初始渲染期间，返回的状态 (state) 与传入的第一个参数 (initialState) 值相同。  
+
+setState 函数用于更新 state。它接收一个新的 state 值并将组件的一次重新渲染加入队列。  
+
+```javascript
+setState(newState);
+```
+在后续的重新渲染中，useState 返回的第一个值将始终是更新后最新的 state。
+
+函数式更新  
+
+如果新的 state 需要通过使用先前的 state 计算得出，那么可以将函数传递给 setState。该函数将接收先前的 state，并返回一个更新后的值。下面的计数器组件示例展示了 setState 的两种用法：
+
+```javascript
+function Counter({initialCount}) {
+  const [count, setCount] = useState(initialCount);
+  return (
+    <>
+      Count: {count}
+      <button onClick={() => setCount(initialCount)}>Reset</button>
+      <button onClick={() => setCount(prevCount => prevCount - 1)}>-</button>
+      <button onClick={() => setCount(prevCount => prevCount + 1)}>+</button>
+    </>
+  );
+}
+```
+
+如果你的更新函数返回值与当前 state 完全相同，则随后的重渲染会被完全跳过。  
+
+initialState 参数只会在组件的初始渲染中起作用，后续渲染时会被忽略。如果初始 state 需要通过复杂计算获得，则可以传入一个函数，在函数中计算并返回初始的 state，此函数只在初始渲染时被调用：
+
+```javascript
+const [state, setState] = useState(() => {
+  const initialState = someExpensiveComputation(props);
+  return initialState;
+});
+```
+
+
+### useEffect
+```javascript
+useEffect(didUpdate);
+```
+该 Hook 接收一个包含命令式、且可能有副作用代码的函数。  
+
+使用 useEffect 完成副作用操作。赋值给 useEffect 的函数会在组件渲染到屏幕之后执行。默认情况下，effect 将在每轮渲染结束后执行，但你可以选择让它 在只有某些值改变的时候 才执行。
+
+清除 effect  
+useEffect 函数需返回一个清除函数。以下就是一个创建订阅的例子：
+```javascript
+useEffect(() => {
+  const subscription = props.source.subscribe();
+  return () => {
+    // 清除订阅
+    subscription.unsubscribe();
+  };
+});
+```
+1. 清除函数会在组件卸载前执行  
+2. 如果组件多次渲染，则在执行下一个 effect 之前，上一个 effect 就已被清除。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
 
 
 
