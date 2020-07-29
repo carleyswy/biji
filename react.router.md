@@ -51,7 +51,7 @@ class App extends Component {
 ```javascript
 import About from './pages/about';
 
-··· ···
+// ...
 
 <Route path='/about' exact component={About}></Route>
 ```
