@@ -5,13 +5,14 @@
 </head>
 <body>
     
-
+<div>1</div>
+<div>2</div>
     <script>
-      let {toString: s} = 123;
-console.log(s);
+//       NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+// // 或者
+// NodeList.prototype[Symbol.iterator] = [][Symbol.iterator];
 
-let {toString: ss} = true;
-console.log(ss);
+console.log([...document.querySelectorAll('div')]) // 可以执行了
     </script>
 </body>
 </html>
