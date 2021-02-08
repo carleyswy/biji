@@ -8,11 +8,24 @@
 <div>1</div>
 <div>2</div>
     <script>
-//       NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
-// // 或者
-// NodeList.prototype[Symbol.iterator] = [][Symbol.iterator];
+let delegatedIterator = (function* () {
+  yield 'Hello!';
+  yield 'Bye!';
+}());
 
-console.log([...document.querySelectorAll('div')]) // 可以执行了
+let delegatingIterator = (function* () {
+  yield 'Greetings!';
+  yield* delegatedIterator;
+  yield 'Ok, bye.';
+}());
+
+for(let value of delegatingIterator) {
+  console.log(value);
+}
+// "Greetings!
+// "Hello!"
+// "Bye!"
+// "Ok, bye."
     </script>
 </body>
 </html>
