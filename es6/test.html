@@ -8,24 +8,38 @@
 <div>1</div>
 <div>2</div>
     <script>
-let delegatedIterator = (function* () {
-  yield 'Hello!';
-  yield 'Bye!';
-}());
-
-let delegatingIterator = (function* () {
-  yield 'Greetings!';
-  yield* delegatedIterator;
-  yield 'Ok, bye.';
-}());
-
-for(let value of delegatingIterator) {
-  console.log(value);
+function getFoo () {
+  return new Promise(function (resolve, reject){
+    resolve('foo');
+  });
 }
-// "Greetings!
-// "Hello!"
-// "Bye!"
-// "Ok, bye."
+
+const g = function* () {
+  try {
+    const foo = yield getFoo();
+    console.log(foo);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+function run (generator) {
+  const it = generator();
+
+  function go(result) {
+    if (result.done) return result.value;
+
+    return result.value.then(function (value) {
+      return go(it.next(value));
+    }, function (error) {
+      return go(it.throw(error));
+    });
+  }
+
+  go(it.next());
+}
+
+run(g);
     </script>
 </body>
 </html>
