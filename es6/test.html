@@ -40,6 +40,40 @@ function run (generator) {
 }
 
 run(g);
+
+
+
+
+var a = 1;
+var b = 2;
+
+async function getStockPriceByName(name) {
+  const symbol = await getStockSymbol(name);
+  const stockPrice = await getStockPrice(symbol);
+  return stockPrice;
+}
+
+async function getStockPriceByName1(name) {
+  const symbol = await getStockSymbol(name);
+  const stockPrice = await getStockPrice(symbol);
+  return stockPrice;
+}
+
+getStockPriceByName('goog').then(function (result) {
+  console.log(result);
+});
+
+getStockPriceByName1('goog').then(function (result) {
+  console.log(result);
+});
+
+
+var c = a + b;
+
+setTimeout(()=>{}, 4000);
+setTimeout();
+
+console.log(c);
     </script>
 </body>
 </html>
