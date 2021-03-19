@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+    
+<div>1</div>
+<div>2</div>
+
+    <script>
+    function Person (name, age){
+        console.log(`new?${true}`)
+        this.name=name;
+        this.age=age;
+    }
+
+    Person.prototype.getName = function(){
+        return this.name;
+    }
+
+    let p = new Person();
+    console.log(p);
+
+    function _new(Parent, ...args){
+        let c = {};
+        let pr = Parent.apply(c, args); // 执行Parent，并且Parent内部的this都指向c
+        c.__proto__ = Parent.prototype;
+
+        if(typeof pr === "object") return pr;
+        else return c;
+
+    }
+
+    let p2 = _new(Person, 'Parrot', 18);
+    console.log(p2);
+    </script>
+</body>
+</html>
