@@ -8,72 +8,19 @@
 <div>1</div>
 <div>2</div>
     <script>
-function getFoo () {
-  return new Promise(function (resolve, reject){
-    resolve('foo');
-  });
-}
 
-const g = function* () {
-  try {
-    const foo = yield getFoo();
-    console.log(foo);
-  } catch (e) {
-    console.log(e);
+function fun1() {
+  var a = 1;
+  function fun2() {
+    var b = 2;
+    console.log(a, b);
   }
-};
-
-function run (generator) {
-  const it = generator();
-
-  function go(result) {
-    if (result.done) return result.value;
-
-    return result.value.then(function (value) {
-      return go(it.next(value));
-    }, function (error) {
-      return go(it.throw(error));
-    });
-  }
-
-  go(it.next());
+  return fun2;
 }
 
-run(g);
+var outfn = fun1();
+outfn();
 
-
-
-
-var a = 1;
-var b = 2;
-
-async function getStockPriceByName(name) {
-  const symbol = await getStockSymbol(name);
-  const stockPrice = await getStockPrice(symbol);
-  return stockPrice;
-}
-
-async function getStockPriceByName1(name) {
-  const symbol = await getStockSymbol(name);
-  const stockPrice = await getStockPrice(symbol);
-  return stockPrice;
-}
-
-getStockPriceByName('goog').then(function (result) {
-  console.log(result);
-});
-
-getStockPriceByName1('goog').then(function (result) {
-  console.log(result);
-});
-
-
-var c = a + b;
-
-setTimeout(()=>{}, 4000);
-setTimeout();
-
-console.log(c);
     </script>
 </body>
 </html>
