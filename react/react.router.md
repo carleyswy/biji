@@ -100,7 +100,7 @@ render 方法也可用来进行权限认证：
 
 ### Switch
 
-渲染与该地址匹配的第一个子节点 <Route> 或者 <Redirect>。
+渲染与该地址匹配的第一个子节点 \<Route\> 或者 \<Redirect\>。
 
 类似于选项卡，只是匹配到第一个路由后，就不再继续匹配：
 ```javascript
@@ -419,3 +419,4 @@ location / {
     }
 ```
 如果 react-router 路由 使用了 hash 模式(即<HashRouter>)，那么在 Nginx 中不需要上面的配置。
+

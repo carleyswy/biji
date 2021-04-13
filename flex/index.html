@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"></mate>
+        <link href="./style.css" type="text/css" rel="stylesheet"></link>
+    </head>
+    <body>
+
+        <div class="container">
+            <header>
+                header header
+            </header>
+
+            <!--垂直水平居中-->
+            <div class="block1 border">
+                <div class="inner border">
+                    inner
+                </div>
+            </div>
+            <style>
+                .block1 {
+                    display: flex;
+                    justify-content: center; 
+                    align-items: center;
+                    width: 200px; 
+                    height: 150px; 
+                }
+                .inner {
+                    width: 50px; 
+                    height: 50px;
+                }
+            </style>
+
+            <!--导航-->
+            <div class="block2 border">
+                <div class="nav border">nav1</div>
+                <div class="nav border">nav2</div>
+                <div class="nav border">nav3</div>
+            </div>
+            <style>
+                .block2 {
+                    display: flex; 
+                    justify-content: space-between;
+                    width:200px;
+                    height: 80px;
+                }
+                .nav {
+                    flex: 1;
+                }
+            </style>
+
+            <!--左图右文-->
+            <div class="block3 border">
+                <div class="left border">图片</div>
+                <div class="right border">flex的使用实例 - 桔子_Lynn - 博客园</div>
+            </div>
+            <style>
+                .block3 {
+                    display: flex; 
+                    justify-content: space-between;
+                    width:300px;
+                    height: 200px;
+                }
+                .left {
+                    width: ;
+                }
+                .right {
+                    flex: 1;
+                }
+            </style>
+
+            <!--固定百分比布局-->
+            <div class="block4 border">
+                <div class="nav nav1 border">nav1</div>
+                <div class="nav nav2 border">nav2</div>
+                <div class="nav nav3 border">nav3</div>
+                <div class="nav nav4 border">nav4</div>
+            </div>
+
+            <style>
+                .block4 {
+                    display: flex; 
+                    width:400px;
+                    height: 50px;
+                }
+                .block4 .nav {
+                    flex: 1;
+                }
+            </style>
+
+            <div class="block5 border">
+                <div class="nav nav1 border">nav1</div>
+                <div class="nav nav2 border">nav2</div>
+                <div class="nav nav3 border">nav3</div>
+                <div class="nav nav4 border">nav4</div>
+            </div>
+
+            <style>
+                .block5 {
+                    display: flex; 
+                    width:400px;
+                    height: 50px;
+                }
+                .block5 .nav {
+                    flex: 1;
+                }
+                .block5 .nav2{
+                    flex: 0 0 50%;
+                }
+            </style>
+
+
+
+            
+        </div>
+    </body>
+</html>
