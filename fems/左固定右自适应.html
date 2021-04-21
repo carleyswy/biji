@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>88</title>
+    <style type="text/css">
+        body {
+            min-width: 550px;
+        }
+        .bfc {
+            overflow: hidden;
+        }
+        #header {
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+
+        #container {
+        
+        }
+        #container .column {
+            float: left;
+        }
+
+        #center {
+            background-color: #ccc;
+
+        }
+        #left {
+            background-color: yellow;
+            width: 200px;
+           
+        }
+     
+
+        #footer {
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+
+        .clearfix:after {
+            content:'';
+            display: table;
+            clear:both;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="header">this is header</div>
+    <div id="container" class="clearfix">
+        <div id="left" class="column">this is leftthis is leftthis is leftthis is leftthis is leftthis is leftthis is leftthis is leftthis is leftthis is leftthis is leftthis is leftthis is leftthis is leftthis is left</div>
+        <div id="center" class="bfc">this is centerthis is centerthis is centerthis is centerthis is centerthis is centerthis is centerthis is centerthis is centerthis is centerthis is center</div>
+    </div>
+    <div id="footer">this is footer</div>
+</body>
+</html>

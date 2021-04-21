@@ -48,6 +48,17 @@ e.nativeEvent.stopImmediatePropagation();
 ```
 
 ### React-Redux
+Redux的实现流程   
+用户页面行为触发一个Action，Store 自动调用 Reducer，并且传入两个参数：当前 State 和收到的 Action。Reducer 会返回新的 State 。每当state更新之后，view会根据state触发重新渲染。   
+
+react-redux的实现原理   
+react-redux是一个轻量级的封装库，它主要通过两个核心方法实现：  
+Provider：从最外部封装了整个应用，并向connect模块传递store。
+Connect：    
+    1、包装原组件，将state和action通过props的方式传入到原组件内部。   
+    2、监听store tree变化，使其包装的原组件可以响应state变化   
+
+
 store文件夹
 action.js
 ```javascript
@@ -162,7 +173,7 @@ dispatch(storeredux.action._setLang(1));
 
 ### 虚拟dom和diff算法
 
-虚拟DOM是由state数据和JSX模板结合生成的，它的本质是一个JS对象，用它来描述真实的DOM。react会把这个虚拟DOM抽象成一个DOM树，当stat数据改变，state数据和JSX模板 会生成新的虚拟DOM，通过Diff算法来对比新旧两个虚拟DOM，找到其中的不同，进而改变真实的DOM结构，来渲染页面的。
+虚拟DOM是由state数据和JSX模板结合生成的，它的本质是一个JS对象，用它来描述真实的DOM。react会把这个虚拟DOM抽象成一个DOM树，当state数据改变，state数据和JSX模板 会生成新的虚拟DOM，通过Diff算法来对比新旧两个虚拟DOM，找到其中的不同，进而改变真实的DOM结构，来渲染页面的。
 
 ```javascript
 // 真实dom
