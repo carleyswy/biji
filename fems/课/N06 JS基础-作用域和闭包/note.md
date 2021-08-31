@@ -44,7 +44,7 @@ console.log(x) // 会报错
 
 # 闭包
 - 函数作为参数被传递
-- 函数作为返回值被返回
+- 函数作为返回值被返回  
 自由变量的查找，是在函数定义的地方，向上级作用域查找，不是在执行的时候向上级作用域查找
 
 ```javascript
@@ -75,13 +75,13 @@ fn()
 ```
 
 # this
-1 作为普通函数  
-2 使用call apply bind  
-3 作为对象方法被调用  
-4 在class方法中调用  
-5 箭头函数  
-this取值由函数执行的时候确定，不是在函数定义的时候确定
-特殊：箭头函数里this定义时的上级的this
+1 作为普通函数 (window)  
+2 使用call apply bind (传入什么绑定什么)   
+3 作为对象方法被调用 （对象本身）  
+4 在class方法中调用 （当前实例本身）   
+5 箭头函数 （上级作用域this的值）  
+this取值由函数执行的时候确定，不是在函数定义的时候确定，谁调用指向谁  
+特殊：箭头函数里this是定义时的上级作用域的this
 ```javascript
 // 1 作为普通函数 
 function fn1(){
@@ -147,18 +147,14 @@ zhangsan.sayHi() // zhangdan
 
 # 题目
 ## 1.this的不用应用场景，如何取值
-## 2 手写bind函数
-## 3 实际开发场景
-## 4 创建10个a标签，点击的时候弹出对应的序号
-```javascript
-let i, a
-for ()
-```
+见上
 
-应用:隐藏数据
+## 2 手写bind函数
+## 3 实际开发中闭包的应用
+应用:闭包隐藏数据，只提供api
 ```javascript
 function createCache(){
-    const data = {}
+    const data = {} // 闭包中的数据被隐藏，外界无法访问
     return {
         set: function (key, val){
             data[key] = val;
@@ -171,5 +167,22 @@ function createCache(){
 
 const c = createCache()
 c.set('a', 100)
-console.log(c.get(a))
+console.log(c.get(a)) //100 
+// 这个a只能通过set get改变和获得，不能通过其他方式
+```
+
+## 4 创建10个a标签，点击的时候弹出对应的序号
+```javascript
+let a;
+for (let i=0; i<10; i++) {
+    a = document.createElement('a');
+    let t = document.createTextNode(i)
+    a.setAttribute('id', i);
+    a.setAttribute('href', "#");
+    a.addEventListener('click', (e)=>{
+        console.log(i,e)
+    })
+    a.appendChild(t)
+    document.body.appendChild(a)
+}
 ```

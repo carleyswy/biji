@@ -1,37 +1,43 @@
 # 宏任务macroTask 微任务microTask
-宏任务：setTimeout，setInterval，ajax，DOM事件
-微任务：Promise，async await
-微任务比宏任务执行时机早
-微任务：DOM渲染前触发，es6语法规定
-宏任务：DOM渲染后触发，浏览器规定
+宏任务：setTimeout，setInterval，ajax，DOM事件  
+微任务：Promise，async await  
+微任务比宏任务执行时机早  
+微任务：DOM渲染前触发，es6语法规定  
+宏任务：DOM渲染后触发，浏览器规定  
 
+&nbsp;
 
 # eventloop 事件循环/事件轮询
 - js是单线程运行的
-- 异步（setTimeout，setInterval，ajax）使用回调来，基于event loop
+- 异步（setTimeout，setInterval，ajax）使用回调，基于event loop
 - DOM事件使用回调，基于event loop
 - event loop是异步回调和DOM事件回调的实现原理
+
+&nbsp;
 
 # js如何执行
 - 从前到后，一行一行执行
 - 如果某一行执行报错，停止后面代码的执行
-- 先执行完同步代码，再执行异步代码
-Call Stack 执行栈
-Web APIs 放宏任务
-Callback Queue 回调函数队列
-micro task queue
-Event Loop
+- 先执行完同步代码，再执行异步代码  
 
-1，同步代码，每执行一行代码，代码放入Call Stack，执行完，清空Call Stack，再放入第二行代码。。。
-2，发现有宏任务，放入Web APIs里，等待时机（setTimeout定时，ajax网络请求，dom操作用户点击等）时机到了，宏任务移动到Callback Queue
-3，发现有微任务，放到micro task queue里
-4，同步代码执行完，Call Stack清空
-5，执行micro task queue里的微任务
-6，尝试DOM渲染
-7，Event Loop开始工作
-8，轮询查找Callback Quene，如果有则移动到Call Stack执行，执行完，清空Call Stack
-9，尝试DOM渲染
-10，继续轮询查找，重复8，9，10
+Call Stack 执行栈  
+Web APIs 放宏任务  
+Callback Queue 回调函数队列  
+micro task queue  
+Event Loop  
+
+1，同步代码，每执行一行代码，代码放入Call Stack，执行完，清空Call Stack，再放入第二行代码。。。  
+2，发现有宏任务，放入Web APIs里，等待时机（setTimeout定时，ajax网络请求，dom操作用户点击等）时机到了，宏任务移动到Callback Queue  
+3，发现有微任务，放到micro task queue里  
+4，同步代码执行完，Call Stack清空  
+5，执行micro task queue里的微任务  
+6，尝试DOM渲染  
+7，Event Loop开始工作  
+8，轮询查找Callback Quene，如果有则移动到Call Stack执行，执行完，清空Call Stack  
+9，尝试DOM渲染  
+10，继续轮询查找，重复8，9，10  
+
+&nbsp;
 
 # Promise
 三种状态：pedding，resolved，rejected
@@ -108,6 +114,8 @@ Promise.reject().catch(() => {
 # async/await
 用同步语法写异步代码，没有回调  
 见 async1.js
+
+&nbsp;
 
 # async/await 和 Promise 的关系
 - 执行async函数，返回Promise对象
@@ -203,7 +211,7 @@ console.log('script start')  //1
 
 setTimeout(function () { 
   console.log('setTimeout')
-}, 0) //7
+}, 0) //8
 
 async1()
 
@@ -263,6 +271,8 @@ test2()
 9，尝试DOM渲染
 10，继续轮询查找，重复8，9，10
 
+&nbsp;
+
 ## 什么是宏任务和微任务，两者有什么区别
 宏任务：setTimeout，setInterval，ajax，DOM事件，es6语法规定
 微任务：Promise，async await，浏览器规定
@@ -270,11 +280,15 @@ test2()
 微任务：DOM渲染前触发
 宏任务：DOM渲染后触发
 
+&nbsp;
+
 ## Promise有哪三种状态？如何变化？
 - pedding 不会触发任何then catch回调
 - pedding->resolved 触发then 回调
 - pedding->rejected 触发catch 回调
 - 状态不可逆 
+
+&nbsp;
   
 ## promise then 和 catch 的连接
 ```javascript
@@ -312,6 +326,8 @@ Promise.resolve().then(() => { // 返回 rejected 状态的 promise
 //1 2
 ```
 
+&nbsp;
+
 ## async/await 语法
 ```javascript
 async function fn() {
@@ -336,6 +352,8 @@ async function fn() {
 
 ```
 
+&nbsp;
+
 ## promise和setTimeout的顺序
 ```javascript
 console.log(100)
@@ -348,6 +366,8 @@ Promise.resolve().then(() => {
 console.log(400)
 // 100 400 300 200
 ```
+
+&nbsp;
 
 ## 外加 async/await 的顺序问题
 ```javascript
