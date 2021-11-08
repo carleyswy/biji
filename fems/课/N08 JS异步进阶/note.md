@@ -151,6 +151,7 @@ console.log( fn3() ) // promise对象
     const p2 = Promise.resolve(100)
     const res = await p2   // await 相当于Promise的then
     console.log(res) // 100
+    
 })()
 
 (async function () {

@@ -36,3 +36,16 @@ for (let i=0; i<10; i++) {
     a.appendChild(t)
     document.body.appendChild(a)
 }
+
+let formData = { c: 10};
+
+const fun1 = () => {
+    formData = { ...{c: 20}}
+};
+
+const fun2 = () => {
+    console.log(formData)
+};
+
+fun1();
+fun2();
